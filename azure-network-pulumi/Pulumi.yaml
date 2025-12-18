@@ -1,0 +1,3 @@
+name: azure-network-pulumi
+runtime: nodejs
+description: A Pulumi project for managing Azure network resources.
