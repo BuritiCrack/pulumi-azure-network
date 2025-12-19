@@ -42,19 +42,10 @@ const subnet2 = new Subnet(
     nsg.nsg.id
 );
 
-const subnet3 = new Subnet(
-    azureConfig.subnet3Name,
-    resourceGroup.name,
-    vnet.vnet.name,
-    azureConfig.subnet3AddressPrefix,
-    nsg.nsg.id
-);
-
 // Exportar los IDs de los recursos creados
 export const resourceGroupId = resourceGroup.id;
 export const vnetId = vnet.vnet.id;
 export const subnetId = subnet.subnet.id;
 export const subnet2Id = subnet2.subnet.id;
-export const subnet3Id = subnet3.subnet.id;
 export const nsgId = nsg.nsg.id;
 

@@ -7,17 +7,16 @@ export const azureConfig = {
     
     resourceGroupName: config.require("resourceGroupName"),
     
+    // myVNet queda con 16 IPs 
     vnetName: "myVNet",
-    vnetAddressSpace: ["10.0.0.0/16"],
+    vnetAddressSpace: ["10.0.0.0/28"],
 
-    subnetName: "invitados",
-    subnetAddressPrefix: "10.0.1.0/24",
+    // cada subnet queda con 8 ips y azure se reserta 5 ips
+    subnetName: "Backend",
+    subnetAddressPrefix: "10.0.0.0/29",
 
-    subnet2Name: "servidores",
-    subnet2AddressPrefix: "10.0.2.0/24",
-
-    subnet3Name: "bd",
-    subnet3AddressPrefix: "10.0.3.0/24",
+    subnet2Name: "Frontend",
+    subnet2AddressPrefix: "10.0.0.8/29",
 
     nsgName: "myNSG"
 };
