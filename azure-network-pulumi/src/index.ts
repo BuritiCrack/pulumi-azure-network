@@ -4,20 +4,20 @@ import { Subnet } from "./network/subnet";
 import { NSG } from "./network/nsg";
 import { azureConfig } from "./config";
 
-// Crear Resource Group
+// Create Resource Group
 const resourceGroup = new azure.resources.ResourceGroup("rg", {
     resourceGroupName: azureConfig.resourceGroupName,
     location: azureConfig.location
 });
 
-// Crear NSG
+// Create NSG
 const nsg = new NSG(
     azureConfig.nsgName,
     resourceGroup.name,
     azureConfig.location
 );
 
-// Crear VNet
+// Create VNet
 const vnet = new VNet(
     azureConfig.vnetName,
     resourceGroup.name,
@@ -25,7 +25,7 @@ const vnet = new VNet(
     azureConfig.vnetAddressSpace
 );
 
-// Crear Subnet con NSG asociado
+// Create Subnet with NSG associated
 const subnet = new Subnet(
     azureConfig.subnetName,
     resourceGroup.name,
@@ -42,7 +42,7 @@ const subnet2 = new Subnet(
     nsg.nsg.id
 );
 
-// Exportar los IDs de los recursos creados
+// Export the IDs of the created resources
 export const resourceGroupId = resourceGroup.id;
 export const vnetId = vnet.vnet.id;
 export const subnetId = subnet.subnet.id;

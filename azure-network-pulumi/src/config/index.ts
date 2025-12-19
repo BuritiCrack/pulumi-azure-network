@@ -1,22 +1,29 @@
 import * as pulumi from "@pulumi/pulumi";
 
 const config = new pulumi.Config();
+const appName = "azure-network-pulumi";
+const env = pulumi.getStack();
+const location = config.get("azure-native:location") || "westus";
+const resourceGroupName = config.require(`rg-${appName}-${env}-${location}`);
 
 export const azureConfig = {
-    location: config.get("azure-native:location") || "westus",
+    location: location,
+
+    resourceGroupName: resourceGroupName,
     
-    resourceGroupName: config.require("resourceGroupName"),
-    
-    // myVNet queda con 16 IPs 
-    vnetName: "myVNet",
-    vnetAddressSpace: ["10.0.0.0/28"],
+    // this vnet contain 3 subnets and has 256 IPs (/24)
+    vnetName: `vnet-${appName}-${env}-${location}`,
+    vnetAddressSpace: ["10.0.0.0/24"],
 
-    // cada subnet queda con 8 ips y azure se reserta 5 ips
-    subnetName: "Backend",
-    subnetAddressPrefix: "10.0.0.0/29",
+    // each snet has 32 IPs (/27)
+    subnetName: `snet-${appName}-${env}-${location}-Frontend`,
+    subnetAddressPrefix: "10.0.0.0/27",
 
-    subnet2Name: "Frontend",
-    subnet2AddressPrefix: "10.0.0.8/29",
+    subnet2Name: `snet-${appName}-${env}-${location}-Backend`,
+    subnet2AddressPrefix: "10.0.0.32/27",
 
-    nsgName: "myNSG"
+    subnet3Name: `snet-${appName}-${env}-${location}-Database`,
+    subnet3AddressPrefix: "10.0.0.64/27",
+
+    nsgName: `nsg-${appName}-${env}-${location}`,
 };
