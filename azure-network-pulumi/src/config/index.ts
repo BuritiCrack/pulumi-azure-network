@@ -4,12 +4,12 @@ const config = new pulumi.Config();
 const appName = "azure-network-pulumi";
 const env = pulumi.getStack();
 const location = config.get("azure-native:location") || "westus";
-const resourceGroupName = config.require(`rg-${appName}-${env}-${location}`);
+const rGroupName = config.require(`rg-${appName}-${env}-${location}`);
 
 export const azureConfig = {
     location: location,
 
-    resourceGroupName: resourceGroupName,
+    resourceGroupName: rGroupName,
     
     // this vnet contain 3 subnets and has 256 IPs (/24)
     vnetName: `vnet-${appName}-${env}-${location}`,
