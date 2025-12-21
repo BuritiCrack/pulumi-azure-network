@@ -5,7 +5,7 @@ import { NSG } from "./network/nsg";
 import { azureConfig } from "./config";
 
 // Create Resource Group
-const resourceGroup = new azure.resources.ResourceGroup("", {
+const resourceGroup = new azure.resources.ResourceGroup(azureConfig.resourceGroupName, {
     resourceGroupName: azureConfig.resourceGroupName,
     location: azureConfig.location
 });

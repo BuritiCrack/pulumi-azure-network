@@ -1,10 +1,11 @@
+console.log(">>> RUNNING src/index.ts <<<");
 import * as pulumi from "@pulumi/pulumi";
 
 const config = new pulumi.Config();
 const appName = "azure-network-pulumi";
 const env = pulumi.getStack();
 const location = config.get("azure-native:location") || "westus";
-const rGroupName = config.require(`rg-${appName}-${env}-${location}`);
+const rGroupName = (`rg-${appName}-${env}-${location}`);
 
 export const azureConfig = {
     location: location,
